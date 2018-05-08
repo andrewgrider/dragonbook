@@ -746,7 +746,7 @@ window.onload = function() {
             window.bot.message(null, window.theme_selection);
         },
         "social": function() {
-            window.bot.message(null, "Add the Developer on a variety of Social Networks.<br /><div class='lineOfSocial'><img src='snapchat.png' class='socialIcon' />&nbsp;javonrules123</div><div class='lineOfSocial'><img src='instagram.png' class='socialIcon' />&nbsp;andrew.grider</div><div class='lineOfSocial'><img src='discord.png' class='socialIcon' />&nbsp;andrewj.g #3169</div><div class='lineOfSocial'><img src='facebook.png' class='socialIcon' />&nbsp;Javon Smith</div>");
+            window.bot.message(null, "Add the Developer on a variety of Social Networks.<br /><div class='lineOfSocial'><img src='snapchat.png' class='socialIcon' />&nbsp;javonrules123</div><div class='lineOfSocial'><img src='instagram.png' class='socialIcon' />&nbsp;javon.smith94</div><div class='lineOfSocial'><img src='discord.png' class='socialIcon' />&nbsp;kryptocial #7858</div><div class='lineOfSocial'><img src='facebook.png' class='socialIcon' />&nbsp;Javon Smith</div>");
         },
         "kick_all": function() {
             if (localStorage.owner == 'true') {
