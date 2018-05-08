@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Not Found</title>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0" />
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        <meta name="description" content="Unblocked Sites for School Chromebooks">
+        <meta name="keywords" content="AACS,LHS,Chromebook,Unblocked,Chromebook Hacks,Dragonbook,Dragonbook Exploited">
+
+        <link rel="icon" type="image/png" href="app-icon.png">
+        <meta name="author" content="Andrew Grider">
+        <meta property="og:image" content="app-icon.png">
+        <meta property="og:title" content="Dragonbook Exploited">
+        <meta property="og:description" content="Exploits for AACS Dragonbooks">
+        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="app-icon-white.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="app-icon-white.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="app-icon-white.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="app-icon-white.png" />
+        <link rel="apple-touch-startup-image" href="app-icon-white.png">
+        <meta name="apple-mobile-web-app-title" content="Dragonbook">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>Dragonbook Error</title>
+        <link href="style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <script>
+    window.onload = function(){
+      var errorTitles = [
+        "Oops!",
+        "Yikes!",
+        "That's an error.",
+        "Uh oh..",
+        "Oof..",
+        "Page not found"
+      ];
+      document.getElementById("errorTitle").innerText = errorTitles[Math.floor(Math.random() * errorTitles.length)];
+    };
+    </script>
+    <div id="titlebar"><span id="titlebarText">Dragonbook <span class='invert' id="exploited">Exploited</span></span></div>
+    <div id='content' style='font-family: "Ubuntu";'>
+      <p style='font-size: 20pt;' id='errorTitle'>That's an error.</p>
+      <div style='font-size: 12pt;'>Something went wrong while loading the page you just tried to access.<br />This could be caused by a script error or an invalid link.</div>
+      <div>
+        <br /><a href='index.html' id='retry' style='text-decoration: none; padding: 7px; border-radius: 5px; background: #555; padding-left: 17px; padding-right: 17px; box-shadow: 1px 1px 3px #111;'>Go Back</a>
+        <a href='javascript:location.reload();' style='text-decoration: none; padding: 7px; border-radius: 5px; background: #555; padding-left: 17px; padding-right: 17px; box-shadow: 1px 1px 3px #111;'>Reload</a>
+      </div>
+    </div>
+  </body>
+</html>

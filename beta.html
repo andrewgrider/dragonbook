@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta Http-Equiv="Cache-Control" Content="no-cache">
+        <meta Http-Equiv="Pragma" Content="no-cache">
+        <meta Http-Equiv="Expires" Content="0">
+        <meta Http-Equiv="Pragma-directive: no-cache">
+        <meta Http-Equiv="Cache-directive: no-cache">
+        <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+        <script>
+            var config = {
+                apiKey: "AIzaSyC3NIu-L-hS7NeyCKhYuA32Vd1dJ-ZJPZc",
+                authDomain: "aacs-dragonbook.firebaseapp.com",
+                databaseURL: "https://aacs-dragonbook.firebaseio.com",
+                projectId: "aacs-dragonbook",
+                storageBucket: "aacs-dragonbook.appspot.com",
+                messagingSenderId: "479558812987"
+            };
+            firebase.initializeApp(config);
+        </script>
+        <meta http-equiv="refresh" content="600">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0" />
+        <meta name="description" content="Unblocked Sites for School Chromebooks">
+        <meta name="keywords" content="AACS,LHS,Chromebook,Unblocked,Chromebook Hacks,Dragonbook,Dragonbook Exploited">
+        <link rel="icon" type="image/png" href="app-icon.png">
+        <meta name="author" content="Andrew Grider">
+        <meta property="og:image" content="app-icon.png">
+        <meta property="og:title" content="Dragonbook Dashboard">
+        <meta property="og:description" content="Exploits for AACS Dragonbooks">
+        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="app-icon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="app-icon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="app-icon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="app-icon.png" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>Dragonbook Dashboard</title>
+        <link href="style.css" rel="stylesheet" type="text/css">
+        <script>
+            window.onload = function() {
+                window.msgLen = 0;
+                window.mods = {};
+                window.moderator = false;
+                firebase.auth().signInAnonymously().
+                catch (function(error) {
+                    error = true;
+                    window.open("denied.html", "_self");
+                }).then(function() {
+                    firebase.database().ref("moderators").on("value", function(e) {
+                        var ee = e.val();
+                        if (ee[firebase.auth().currentUser.uid]) {
+                            window.moderator = true;
+                        } else {
+                            window.moderator = false;
+                        }
+                        for (i in ee) {
+                            window.mods[i] = true;
+                        }
+                    });
+                    firebase.database().ref("admins").on("value", function(e) {
+                        var ee = e.val();
+                        if (ee[firebase.auth().currentUser.uid]) {
+                            window.hyper_mod = true;
+                        } else {
+                            window.hyper_mod = false;
+                        }
+                    });
+                    firebase.database().ref("vips").on("value", function(e) {
+                        var ee = e.val();
+                        if (ee[firebase.auth().currentUser.uid]) {
+                            window.vip = true;
+                        } else {
+                            window.vip = false;
+                        }
+                    });
+                    window.active = true;
+                    window.onfocus = function(){
+                        window.active = true;
+                        window.msgLen = $("#chat").children().length;
+                    };
+                    window.onblur = function(){
+                        window.active = false;    
+                    };
+                    firebase.database().ref().once("value").then(function(e) {
+                        var value = "<span class='d'>" + JSON.stringify(e.val(), null, '\t');
+                        value = value.replace(/\n/g, "</span><span class='d'>");
+                        value += "</span>";
+                        $("#db").html(value);
+                        
+                    });
+                    firebase.database().ref("moderator-chat").on("value", function(data) {
+                        var len = 0;
+                        for(i in data.val()){
+                            len++;
+                        }
+                        if(len > window.msgLen){
+                            document.getElementsByTagName("title")[0].innerText = "Dashboard (" + (len - window.msgLen) + ")";
+                        }
+                        var ping = new Audio();
+                        ping.src = "notify-mod.mp3";
+                        ping.play();
+                        var data = data.val();
+                        var nameReg = new RegExp("@" + localStorage.name.replace(/<(.*?)>/g, ""), "g");
+                        var everyReg = new RegExp("@everyone", "g");
+                        $("#chat").html("");
+                        for (messages in data) {
+                            message = data[messages];
+                            var name = message.name;
+                            var msg = message.msg;
+                            msg = msg.replace(nameReg, "<span class='tag'>" + "@" + localStorage.name.replace(/<(.*?)>/g, "") + "</span>");
+                            msg = msg.replace(everyReg, "<span class='tag'>@everyone</span>");
+                            var block = "<div class='msg'><b style='color: #FFF;'>" + name + ":</b> " + msg + "<br /></div>";
+                            $("#chat").append(block);
+                        }
+                        var height = document.getElementById("chat").scrollHeight;
+                        var speedScroll = document.getElementById("chat").scrollTop;
+                        $("#chat").animate({
+                                scrollTop: height
+                            }, ((height - speedScroll) * 0.75));
+                    });
+                    $("#textarea").on('keyup', function(e) {
+                        if (e.which == 13) {
+                            var pack = {
+                                "name": localStorage.name,
+                                "msg": $(this).val()
+                            };
+                            if ($(this).val().length > 0) {
+                                if ($("#chat").children().length >= 50) {
+                                    firebase.database().ref("moderator-chat").set({
+                                            "0": {
+                                                "name": "<i>[System]</i>",
+                                                "msg": "Chat Cleared; Reason: Messages exceeded a length of 50."
+                                            }
+                                        });
+                                } else {}
+                                if ($(this).val() == "!clear") {
+
+                                    firebase.database().ref("moderator-chat").set({
+                                            "0": {
+                                                "name": "<i>[System]</i>",
+                                                "msg": "Chat Cleared; Reason: " + localStorage.name + " issued clearing protocol."
+                                            }
+                                        });
+                                }
+                                else {
+                                    firebase.database().ref("moderator-chat").push(pack);
+                                }
+                                $(this).val("");
+                            } else {}
+                        } else {}
+                    })
+                    setTimeout(function() {
+                        if (window.moderator === true || window.vip === true || window.hyper_mod === true) {
+                            $("#login").html("<h4 id='auth' style='color:#0F0;'>[Access Granted]</h4>");
+                            setTimeout(function() {
+                                $("#login").remove();
+                            }, 2000);
+                        } else {
+                            $("#login").html("<h4 id='auth' style='color:#F00;'>[Access Denied]</h4>");
+                            setTimeout(function() {
+                                location.reload();
+                            }, 2000);
+                        }
+                    }, 3000);
+                });
+                $(".fb").click(function() {
+                    var feedback = prompt("Enter your feedback here...");
+                    if (feedback) {
+                        firebase.database().ref("feedback").push(feedback);
+                        alert("Your feedback is being reviewed by Andrew! Thanks for contributing!");
+                    } else {}
+                });
+                if ($("#linksss").text().replace(/\s/g, "") == "") {
+                    $("#linksss").html("<div class='na'>Nothing to show</div>");
+                } else {}
+                $("#imageUpload").on("change", function(event) {
+                    var input = event.target;
+                    var reader = new FileReader();
+                    reader.onload = function() {
+                        var source = reader.result;
+                        $("#result").attr("src", source);
+                    };
+                    reader.readAsDataURL(input.files[0])
+                });
+                $("#UploadImage").click(function() {
+                    var packages = {
+                        "msg": "Image uploaded by " + localStorage.name + "<img src='" + $("#result").attr("src") + "' class='content' />",
+                        "name": "<span class='ico bot'></span><span style='color:#0D0;'>[DragonBot]</span>",
+                        "time": new Date().toLocaleTimeString(),
+                        "uid": firebase.auth().currentUser.uid
+                    };
+                    firebase.database().ref("messages").push(packages);
+                    $("#result").attr("src", null);
+                    $("#uploadImage").val("");
+                });
+            };
+        </script>
+        <style>
+            h2 {
+                border: none;
+                cursor: default;
+            }
+            h2:hover {
+                border-bottom: none;
+            }
+            .fb {
+                cursor: pointer;
+            }
+            .na {
+                color: #555;
+            }
+            input[type=text], #reason {
+                border: none;
+                outline: none;
+                background: #555;
+                font-size: 10pt;
+                margin: 3px;
+                padding: 3px;
+                color: #FFF;
+                width: 25%;
+            }
+            #sendReport {
+                font-size: 10pt;
+                border: none;
+                outline: none;
+                color: #FFF;
+                background: #111;
+                margin: 3px;
+                padding: 3px;
+                width: 25%;
+                cursor: pointer;
+            }
+            #sendReport:hover {
+                background: #333;
+            }
+            #login {
+                background: #222;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                width: 100vw;
+                position: fixed;
+                left: 0;
+                top: 0;
+                z-index: 5;
+            }
+            #auth {
+                font-weight: lighter;
+                font-size: 25pt;
+                color: #FFF;
+                font-family: monospace;
+                margin: 50px;
+            }
+            p {
+                margin: 0;
+            }
+            #result {
+                display: block;
+                max-width: 300px;
+            }
+            #imageUpload {
+                display: block;
+            }
+            #UploadImage {
+                display: block;
+                border: none;
+                outline: none;
+                color: #FFF;
+                background: #111;
+                margin: 3px;
+                padding: 3px;
+                width: 25%;
+                cursor: pointer;
+            }
+            #UploadImage:hover {
+                background: #333;
+            }
+            @keyframes spin {
+                from {
+                    transform: rotate(0deg);
+                }
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+            @keyframes blink {
+                0% {
+                    background: rgba(255, 230, 0, 0.5);
+                }
+                50% {
+                    background: rgba(255, 230, 0, 0.1);
+                }
+                100% {
+                    background: rgba(255, 230, 0, 0.5);
+                }
+            }
+            .tag {
+                background: rgba(255, 230, 0, .3);
+                transition: background 250ms ease;
+                border-radius: 5px;
+                padding: 1px;
+                animation: 1s linear 0s infinite blink;
+            }
+            #loader {
+                width: 50px;
+                height: 50px;
+                border-style: solid;
+                border-color: #555 #222;
+                border-radius: 50%;
+                animation: .775s cubic-bezier(0.15, 0.15, 0.3, 0.3) 0s infinite spin;
+                display: inline-block;
+                margin: 0;
+            }
+            #chat {
+                height: calc(100% - 120px);
+                width: 300px;
+                position: fixed;
+                right: 0;
+                bottom: 30px;
+                overflow: auto;
+                overflow-x: hidden;
+                overflow-y: auto;
+                background: #333;
+                color: #AAA;
+                font-size: 10pt;
+            }
+            #textarea {
+                width: 290px;
+                height: 20px;
+                padding: 5px;
+                border: none;
+                outline: none;
+                background: #555;
+                color: #FFF;
+                position: fixed;
+                right: 0;
+                bottom: 0;
+                margin: 0;
+            }
+            .msg {
+                word-wrap: break-word;
+                margin: 0;
+                padding: 5px;
+            }
+            .msg:nth-child(even) {
+                background: #444;
+            }
+            #db {
+                overflow: auto;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+            .d {
+                display: block;
+                overflow: auto;
+            }
+            .d:hover {
+                background: #F00;
+                outline: solid 1px #FFF;
+            }
+        </style>
+    </head>
+
+    <body>
+        <base target="_blank">
+        <div id="login">
+            <div style="text-align:center;">
+                 <h4 id='auth'>Authenticating</h4>
+                <div id='loader'></div>
+            </div>
+        </div>
+        <div id="titlebar">Dragonbook <span class='invert'>Dashboard</span>
+        </div>
+        <div id='content'>
+             <h2>Beta Links</h2>
+            <blockquote id='linksss'>
+                 <a href="https://bmovies.re/bmovies.to?rel=kc">BMovies</a><br />
+                 <a href="applications.html">Moderator Applications</a>
+                <br />
+            </blockquote>
+             <h2>Chat Commands for Moderators</h2>
+            <blockquote>
+                <p>!clear</p>
+                <p>!viewlog</p>
+                <p>!collect_id</p>
+                <p>!console</p>
+            </blockquote>
+             <h2 class="fb">Report Unworking Link</h2>
+             <h2 class="fb">Make a Suggestion</h2>
+             <h2>Upload Image to Chat</h2>
+            <blockquote>
+                <img src="" id="result" />
+                <input type="file" id="imageUpload" />
+                <button id="UploadImage">Send</button>
+            </blockquote>
+             <h2>Database</h2>
+            <blockquote>
+                 <pre id='db'>Loading...</pre>
+            </blockquote>
+        </div>
+        <div id='chat'></div>
+        <input type='text' id='textarea' placeholder='Moderator & VIP Chat...' />
+    </body>
+
+</html>

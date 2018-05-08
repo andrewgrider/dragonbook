@@ -1,0 +1,158 @@
+<!--
+    HTML
+    eat ass, sled fast, smoke grass - Dan the Meme Man <3
+    sled gang - Dan the Meme Man <3
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="google-site-verification" content="64C5JvMHQYWJEUvwVuZri35qPlspeDG0LbOA0cBbEM8" />
+    <!-- 
+            blxrz - level 11 - 291709
+        -->
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyC3NIu-L-hS7NeyCKhYuA32Vd1dJ-ZJPZc",
+            authDomain: "aacs-dragonbook.firebaseapp.com",
+            databaseURL: "https://aacs-dragonbook.firebaseio.com",
+            projectId: "aacs-dragonbook",
+            storageBucket: "aacs-dragonbook.appspot.com",
+            messagingSenderId: "479558812987"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <!-- <meta http-equiv="refresh" content="600"> 600 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <meta name="description" content="Unblocked Sites for School Chromebooks">
+    <meta name="keywords" content="AACS,LHS,Chromebook,Unblocked,Chromebook Hacks,Dragonbook,Dragonbook Exploited">
+
+    <link rel="icon" type="image/png" href="app-icon.png">
+    <meta name="author" content="Andrew Grider">
+    <meta property="og:image" content="app-icon.png">
+    <meta property="og:title" content="Dragonbook Exploited">
+    <meta property="og:description" content="Exploits for AACS Dragonbooks">
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="app-icon-white.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="app-icon-white.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="app-icon-white.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="app-icon-white.png" />
+    <link rel="apple-touch-startup-image" href="app-icon-white.png">
+    <meta name="apple-mobile-web-app-title" content="Dragonbook">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Moderator Applications</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <script>
+        window.onload = function() {
+            window.allowedToView = false;
+            window.signedIn = true;
+            firebase.auth().signInAnonymously().catch(function(e) {
+                window.signedIn = false;
+            }).then(function() {
+                window.acceptUser = function(id, name){
+                    firebase.database().ref('applications/' + id).remove();
+                    firebase.database().ref('moderators/' + id).set(name);
+                };
+                window.denyUser = function(id){
+                    firebase.database().ref('applications/' + id).remove();
+                };
+                if (window.signedIn === true) {
+
+                    firebase.database().ref("applications").on("value", function(data) {
+                        firebase.database().ref("admins").once("value").then(function(e) {
+                            e = e.val();
+                            if (e[firebase.auth().currentUser.uid]) {
+                                window.allowedToView = true;
+                            }
+                        });
+                        if (localStorage.owner == 'true') {
+                            window.allowedToView = true;
+                        } else {}
+                        if (localStorage.restricted == 'true') {
+                            window.allowedToView = false;
+                        } else {}
+                      setTimeout(function(){
+                        if (window.allowedToView === true) {
+                            $("#content").html("");
+                            data = data.val();
+                            for (var i in data) {
+                                if(i == 'user'){
+                                    continue;
+                                }
+                                var uname = data[i].name;
+                                var unote = data[i].note;
+                                var uid = data[i].id;
+                                var user = $("<div>")
+                                    .text(uname)
+                                    .css({
+                                        "color": "#AAA"
+                                    });
+                                var desc = $("<div>")
+                                    .text(unote)
+                                    .css({
+                                        "color": "#FFF",
+                                        "width": "50%"
+                                    });
+                                var accept = $("<button>")
+                                    .text("ACCEPT")
+                                .attr("onclick", "acceptUser('" + uid + "', '" + uname + "')")
+                                    .css({
+                                        "border": "none",
+                                        "outline": "none",
+                                        "background": "transparent",
+                                        "color": "#0F0",
+                                        "cursor" : "pointer"
+                                    });
+                                var deny = $("<button>")
+                                    .text("DENY")
+                                    .attr("onclick", "denyUser('" + uid + "')")
+                                    .css({
+                                        "border": "none",
+                                        "outline": "none",
+                                        "background": "transparent",
+                                        "color": "red",
+                                        "cursor" : "pointer"
+                                    });
+                                var newApplication = $("<div>")
+                                    .append(user)
+                                    .append(desc)
+                                    .append(accept)
+                                    .append(deny)
+                                    .css({
+                                        "width": "calc(80% - 30px)",
+                                        "padding": "15px",
+                                        "background": "#555",
+                                        "border-radius": "5px",
+                                        "margin-top": "15px"
+                                    });
+                                $("#content").append(newApplication);
+                            }
+                        } else {
+                            location.reload();
+                        }
+                    }, 5000)
+                    });
+                }
+            });
+        };
+    </script>
+</head>
+
+<body>
+    <base target="_blank">
+    <div id="titlebar"><span id="titlebarText">Dragonbook <span class='invert' id="exploited">Applications</span></span>
+    </div>
+    <div id='content'>
+
+    </div>
+</body>
+
+</html>

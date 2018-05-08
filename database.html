@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta Http-Equiv="Cache-Control" Content="no-cache">
+        <meta Http-Equiv="Pragma" Content="no-cache">
+        <meta Http-Equiv="Expires" Content="0">
+        <meta Http-Equiv="Pragma-directive: no-cache">
+        <meta Http-Equiv="Cache-directive: no-cache">
+        <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+        <script>
+            var config = {
+                apiKey: "AIzaSyC3NIu-L-hS7NeyCKhYuA32Vd1dJ-ZJPZc",
+                authDomain: "aacs-dragonbook.firebaseapp.com",
+                databaseURL: "https://aacs-dragonbook.firebaseio.com",
+                projectId: "aacs-dragonbook",
+                storageBucket: "aacs-dragonbook.appspot.com",
+                messagingSenderId: "479558812987"
+            };
+            firebase.initializeApp(config);
+        </script>
+        <meta http-equiv="refresh" content="600">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0" />
+        <meta name="description" content="Unblocked Sites for School Chromebooks">
+        <meta name="keywords" content="AACS,LHS,Chromebook,Unblocked,Chromebook Hacks,Dragonbook,Dragonbook Exploited">
+        <link rel="icon" type="image/png" href="app-icon.png">
+        <meta name="author" content="Andrew Grider">
+        <meta property="og:image" content="app-icon.png">
+        <meta property="og:title" content="Dragonbook Dashboard">
+        <meta property="og:description" content="Exploits for AACS Dragonbooks">
+        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="app-icon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="app-icon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="app-icon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="app-icon.png" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>Dragonbook Database</title>
+        <link href="style.css" rel="stylesheet" type="text/css">
+        <style>
+          #source {
+            width: 100%;
+            max-width: 750px;
+            height: 50vh;
+            background: #222;
+            color: #FFF;
+            outline: none;
+            display: block
+          }
+          #update, #reset {
+            width: 100%;
+            max-width: 750px;
+            background: #444;
+            color: #FFF;
+            border: none;
+            outline: none;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin-top: 2.5px;
+            margin-bottom: 2.5px;
+            cursor: pointer;
+          }
+          .ctrls {
+            width: 100%;
+            max-width: 750px;
+            background: transparent;
+            color: #FFF;
+            position: static;
+          }
+        </style>
+        <script>
+        window.resetDefault = {
+   "admins": {
+      "user": true
+   },
+   "applications": {
+      "user": {
+         "id": true,
+         "name": true,
+         "note": true
+      }
+   },
+   "banned": {
+      "user": true
+   },
+   "codes": {
+      "user": true
+   },
+   "commands": {
+      "bee_movie": true,
+      "clear": true,
+      "collect_id": true,
+      "console": true,
+      "viewlog": true
+   },
+   "crucial_updates": false,
+   "feedback": [
+      null,
+      true
+   ],
+   "messages": {
+      "0": {
+         "date": "Error",
+         "id": "Dragon_Bot",
+         "msg": "Database Reset",
+         "name": "<span class='ico bot'></span><span style='color:#0D0;'>[DragonBot]</span>",
+         "time": "Error",
+         "timestamp": 1234567890
+      },
+   },
+   "moderator-chat": [
+      {
+         "msg": "Chat Cleared; Reason: Database Reset.",
+         "name": "<i>[System]</i>"
+      }
+   ],
+   "moderators": {
+      "user": true,
+   },
+   "online": {
+     "DragonBot": true
+   },
+   "report": {
+      "user": true
+   },
+   "security_updates": false,
+   "uid": {
+      "user": "true"
+   },
+   "views": 0,
+   "vips": {
+      "user": true
+   }
+};
+          window.updates = true;
+          window.onload = function(){
+            class Database {
+              constructor(data){
+                this.data = JSON.parse(data);
+                this.setKey = function(name, value){
+                  if(name && value){
+                    this.data[name] = value;
+                  }
+                };
+                this.deleteKey = function(path){
+                  delete this.data[path];
+                };
+                this.setDatabase = function(){
+                  firebase.database().ref().set(this.data);
+                };
+              }
+            }
+            firebase.auth().signInAnonymously().catch(function(err){
+              location.reload();
+            }).then(function(){
+              if(localStorage.owner != 'true'){
+                location.href = 'https://dragonbook.neocities.org/not_found.html';
+              } else {};
+              firebase.database().ref().on("value", function(database){
+                var data = database.val();
+                if(window.updates === true){
+                  $("#source").val(JSON.stringify(data, null, '   '));
+                }
+              });
+            });
+            $('#getUpdates').on('click', function(){
+              window.updates = $(this).is(":checked");
+            });
+            $("#update").on("click", function(){
+              var valid = true;
+              var s = $("#source").val();
+              try {
+                var d = new Database(s);
+              } catch(syntaxError){
+                valid = false;
+                var syntax = false;
+                var es = syntaxError.toString();
+                var esn = es.replace(/[^0-9]/ig, '');
+                if(esn.length > 0){
+                  syntax = true;
+                  esn = parseInt(esn) + 1;
+                  console.log(esn);
+                  document.getElementById("source").focus();
+                  document.getElementById("source").selectionStart = esn - 1;
+                  document.getElementById("source").selectionEnd = esn;
+                }
+                alert("We detected an error on your part, You entered a value that will crash the database so we aborted your changes before they could take effect. This is the error we got to better help you fix your mistake. \n\n" + syntaxError + "\n" + (syntax ? "We have highlighted this error." : ""));
+              }
+              var r = JSON.stringify(window.resetDefault);
+              if(s && (s.length >= r.length)){
+                if(valid === true){
+                  d.setDatabase();
+                } else {}
+              } else {
+                if(valid === false){}
+                else {
+                  alert("Due to safety protocols, we have disabled the ability to completely wipe the database of all directories and data as it would corrupt the website.\n\nWe also have safety features to make sure the data entered is not spam and/or harmful.");
+                }
+              }
+            });
+            $("#reset").on("click", function(){
+              var c = confirm("WARNING\nThis resets the entire database for emergency purposes only!\nThis removes all moderators, vips, hypermods, public messages, moderator messages, views, applications, etc..\nTHIS CAN NOT BE UNDONE");
+            })
+          };
+        </script>
+  </head>
+  <body>
+    <div id="titlebar">Dragonbook <span class='invert'>Database</span>
+        </div>
+        <div id='content'>
+        <br />
+          <small style='width: 100%; max-width: 750px;display: block;'>Before editing ANYTHING, please make sure you understand <a href='https://www.w3schools.com/js/js_json_syntax.asp' target='_blank'>JSON Syntax</a> to avoid any possible corruption of database. The database is interpretted in JSON.</small>
+          <textarea id='source' placeholder='Database...'></textarea>
+          <div>
+            <button id='update'>Save Changes</button>
+            <button id='reset'>Factory Reset Database</button>
+            <table border='0' style='width: 100%;max-width: 750px;'>
+              <tr>
+                  <td>Recieve Updates</td>
+                  <td>
+                    <input type='checkbox' id='getUpdates' name='getUpdates' checked />
+                    <label for='getUpdates'></label>
+                  </td>
+               </tr>
+            </table>
+          </div>
+          <hr style='width: 100%; max-width: 750px;float: left;' />
+          <small style='width: 100%; max-width: 750px;display: block;'><b>Notice:</b> The database 'updates' when a message is sent, when a chat is cleared, when any data is changed or altered including messages and names, when a user connects to the website or chat, when an application is sent, when a report is sent, when feedback was sent, when any value has been deleted or removed including messages, when a user gets promoted, when someone gets kicked or banned, and when a user disconnects form the website or chat. Everytime the database updates, it clears the textbox above and displays all data in the database. Edits to this will only take effect after you click 'Save Changes', If the database has edits that are not saved and the database updates, all edits will be cleared.<br /><i>ANY DATA WITH THE USERNAME OR ID OF "USER" IS JUST A PLACEHOLDER TO KEEP THE DIRECTORY FROM AUTO DELETING ITSELF (THE DATABASE DELETES ANYTHING IF IT HAS NO DATA STORED UNDER IT)</i></small>
+        </div>
+  </body>
+</html>

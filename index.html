@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta property="og:title" content="Dragonbook Exploited">
+        <meta property="og:description" content="Exploits for AACS Dragonbooks">
+        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="app-icon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="app-icon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="app-icon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="app-icon.png" />
+        <link rel="apple-touch-startup-image" href="app-icon.png">
+        <meta name="apple-mobile-web-app-title" content="Dragonbook">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="#333">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0" />
+        <meta name="description" content="Unblocked Sites for School Chromebooks">
+        <meta name="keywords" content="AACS,LHS,Chromebook,Unblocked,Chromebook Hacks,Dragonbook,Dragonbook Exploited">
+        <link rel="icon" type="image/png" href="app-icon.png">
+        <meta name="author" content="Andrew Grider">
+        <meta property="og:image" content="app-icon.png">
+        <meta property="og:title" content="Dragonbook Exploited">
+        <meta property="og:description" content="Exploits for AACS Dragonbooks">
+        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="app-icon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="app-icon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="app-icon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="app-icon.png" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>Dragonbook</title>
+        <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyC3NIu-L-hS7NeyCKhYuA32Vd1dJ-ZJPZc",
+    authDomain: "aacs-dragonbook.firebaseapp.com",
+    databaseURL: "https://aacs-dragonbook.firebaseio.com",
+    projectId: "aacs-dragonbook",
+    storageBucket: "aacs-dragonbook.appspot.com",
+    messagingSenderId: "479558812987"
+  };
+  firebase.initializeApp(config);
+</script>
+        <style>
+        /*
+        // blue - radial-gradient(#055, #044, #033, #022, #011, #000)
+        // red - radial-gradient(#500, #400, #300, #200, #100, #000)
+        // purple - radial-gradient(#505, #404, #303, #202, #101, #000)
+        */
+            body, html {
+    background: radial-gradient(#505, #404, #303, #202, #101, #000);
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: arial;
+}
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+/*
+duration | timing-function | delay | 
+iteration-count | direction | fill-mode | play-state | name
+*/
+#layer1 {
+    background: transparent;
+    border: dashed 5px #FBF;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    animation: 2.5s linear 0s infinite spin;
+    position: fixed;
+    left: calc(50% - 30px);
+    top: calc(50% - 30px);
+}
+#layer2 {
+    background: transparent;
+    border: dashed 100px #F7F;
+    opacity: 0.9;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    animation: 3s linear 0s infinite alternate spin;
+    position: fixed;
+    left: calc(50% - 225px);
+    top: calc(50% - 225px);
+}
+#layer3 {
+    background: transparent;
+    border: outset 5px #A0A;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    animation: 2s ease-in-out 0s infinite alternate-reverse spin;
+    position: fixed;
+    left: calc(50% - 55px);
+    top: calc(50% - 55px);
+}
+#layer4 {
+    background: transparent;
+    border: inset 5px #A0A;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    animation: 3.5s ease-in-out 0s infinite spin;
+    position: fixed;
+    left: calc(50% - 255px);
+    top: calc(50% - 255px);
+}
+#layer5 {
+    background: transparent;
+    border: outset 15px #A0A;
+    border-style: inset dashed;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    animation: 3.5s linear 0s infinite reverse spin;
+    position: fixed;
+    left: calc(50% - 90px);
+    top: calc(50% - 90px);
+}
+#layer6 {
+    background: transparent;
+    border: double 25px #FBF;
+    border-style: double dashed;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    animation: 2.5s linear 0s infinite reverse spin;
+    position: fixed;
+    left: calc(50% - 215px);
+    top: calc(50% - 215px);
+    box-shadow: 0 0 0px 3px #FBF;
+}
+canvas {
+    display:block;
+    opacity: 0.5;
+}
+#overlay {
+    position: fixed;
+    left: 10vw;
+    top: 10vh;
+    width: 80vw;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    text-align: left;
+    color: #FFF;
+}
+.big {
+    font-size: 25pt;
+    font-weight: bolder;
+}
+#offset {
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    color: #FFF;
+    font-size: 20pt;
+    font-weight:bold;
+}
+        </style>
+        <script>
+            window.onload=function(){
+            if(!location.href.match(/noload=true/)){
+            if(!navigator.userAgent.match(/\sCrOS\s/)){
+                setTimeout(function(){
+                    if(!(location.href.match(/unblocked=true|mobile=true/))){
+                        location.href = "denied.html";
+                    } else {}
+                }, 2000);
+            } else {}
+            var linkvars = window.location.href.split("https://" + location.host + "/?")[1];
+            if(linkvars) {
+              linkvars = "?" + linkvars;
+            } else {
+            linkvars = window.location.href.split("https://" + location.host + "?")[1];  
+              if(linkvars) {
+                linkvars = "?" + linkvars;
+              } else {}
+            }
+            linkvars = linkvars ? linkvars : "";
+            console.log(linkvars);
+            setTimeout(function(){
+                firebase.auth().signInAnonymously().catch(function(err){
+                    location.reload();
+                }).then(function(){
+                    firebase.database().ref("uid").on("value", function(e){
+                        if((e.val())[firebase.auth().currentUser.uid]){
+                            location.href = ("denied.html");
+                        } 
+                        else {
+                            if(location.href.match(/unblocked=true|mobile=true/) || navigator.userAgent.match(/\sCrOS\s/)){
+                                location.href = ("accepted.html" + linkvars);
+                            }
+                            else {
+                               location.href = "denied.html";
+                            }
+                        }
+                    });
+                });
+            }, (location.href.match(/&load=reconnect/) ? 500 : 5000));
+            } else {}
+            setTimeout(function(){
+                document.getElementById("stats").innerText = "Authenticating..."
+            }, (location.href.match(/&load=reconnect/) ? 200 : 1500));
+            var c = document.getElementById("c");
+        var ctx = c.getContext("2d");
+            c.height = window.innerHeight;
+        c.width = window.innerWidth;
+
+        //chinese characters - taken from the unicode charset
+        var matrix = " DRAGONBOOK EXPLOITED";
+        //converting the string into an array of single characters
+        matrix = matrix.split("");
+
+        var font_size = 10;
+        var columns = c.width/font_size; //number of columns for the rain
+        //an array of drops - one per column
+        var drops = [];
+        //x below is the x coordinate
+        //1 = y co-ordinate of the drop(same for every drop initially)
+        for(var x = 0; x < columns; x++)
+            drops[x] = 1; 
+
+        //drawing the characters
+        function draw()
+        {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.04)";
+            ctx.fillRect(0, 0, c.width, c.height);
+
+            ctx.fillStyle = "#FF00FF"; //green text
+            ctx.font = font_size + "px monospace";
+            var ind = 0;
+            for(var i = 0; i < drops.length; i++)
+            {
+                if(ind == matrix.length ){
+                    ind = 0;
+                } else {}
+                var text = matrix[ind];
+                ind++
+                ctx.fillText(text, i*font_size, drops[i]*font_size);
+                if(drops[i]*font_size > c.height && Math.random() > 0.975){
+                    drops[i] = 0;
+                } else {}
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 35);
+            };
+        </script>
+    </head>
+    <body>
+        <canvas id="c"></canvas>
+        <div id=layer1></div>
+        <div id='layer2'></div>
+        <div id='layer3'></div>
+        <div id='layer4'></div>
+        <div id='layer5'></div>
+        <div id='layer6'></div>
+        <div id='overlay'>
+            <div>
+                <div class='big'>DDOS Protection</div>
+                <div id="stats">Checking Browser...</div>
+            </div>
+        </div>
+        <div id="offset">Andrew G</div>
+    </body>
+</html>
