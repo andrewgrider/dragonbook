@@ -192,7 +192,7 @@ window.onload = function() {
             "box-shadow" : "1px 1px 3px #000",
             "max-width" : "100vw"
         **/
-        var gameScn = "<object type=\"application/x-shockwave-flash\" data=\"/games/" + e.value + "\" style=\"width: 75%;height: 90%;background-color: #000;box-shadow: 1px 1px 3px #000;max-width: calc(100% - 300px);\"><param name=\"wmode\" value=\"direct\"></object>";
+        var gameScn = "<object type=\"application/x-shockwave-flash\" data=\"https://andrewgrider.github.io/dragonbook/games/" + e.value + "\" style=\"width: 75%;height: 90%;background-color: #000;box-shadow: 1px 1px 3px #000;max-width: calc(100% - 300px);\"><param name=\"wmode\" value=\"direct\"></object>";
         var exit = $("<div>")
             .css({
                 "color": "white",
