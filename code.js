@@ -606,9 +606,6 @@ window.onload = function() {
                 }
             }
         },
-        "add": function() {
-            window.bot.message(null, "Add Javon on Snapchat!<br /><img src='IMG_0597.JPG' class='content' />");
-        },
         "sys_info": function() {
             var info = navigator.userAgent;
             info = info.split(/\(|\)/g)[1];
@@ -747,7 +744,7 @@ window.onload = function() {
             window.bot.message(null, window.theme_selection);
         },
         "social": function() {
-            window.bot.message(null, "Add the Developer on a variety of Social Networks.<br /><div class='lineOfSocial'><img src='snapchat.png' class='socialIcon' />&nbsp;javonrules123</div><div class='lineOfSocial'><img src='instagram.png' class='socialIcon' />&nbsp;javon.smith94</div><div class='lineOfSocial'><img src='discord.png' class='socialIcon' />&nbsp;kryptocial #7858</div><div class='lineOfSocial'><img src='facebook.png' class='socialIcon' />&nbsp;Javon Smith</div>");
+            window.bot.message(null, "Add the Developer on a variety of Social Networks.<br /><div class='lineOfSocial'><img src='snapchat.png' class='socialIcon' />&nbsp;djslendera</div><div class='lineOfSocial'><img src='instagram.png' class='socialIcon' />&nbsp;andrew.grider</div><div class='lineOfSocial'><img src='discord.png' class='socialIcon' />&nbsp;andrewj.g</div><div class='lineOfSocial'><img src='facebook.png' class='socialIcon' />&nbsp;Andrew Grider</div>");
         },
         "kick_all": function() {
             if (localStorage.owner == 'true') {
