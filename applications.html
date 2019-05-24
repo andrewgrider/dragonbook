@@ -70,19 +70,11 @@
                     firebase.database().ref("applications").on("value", function(data) {
                         firebase.database().ref("admins").once("value").then(function(e) {
                             e = e.val();
-                            if (e[firebase.auth().currentUser.uid]) {
-                                window.allowedToView = true;
+                            if (!e[firebase.auth().currentUser.uid]) {
+                                location.href = "about:blank";
                             }
-                        });
-                        if (localStorage.owner == 'true') {
-                            window.allowedToView = true;
-                        } else {}
-                        if (localStorage.restricted == 'false') {
-                            window.allowedToView = true;
-                        } else {}
-                      setTimeout(function(){
-                        if (window.allowedToView === true) {
-                            $("#content").html("");
+                            else {
+                                $("#content").html("");
                             data = data.val();
                             for (var i in data) {
                                 if(i == 'user'){
@@ -136,10 +128,7 @@
                                     });
                                 $("#content").append(newApplication);
                             }
-                        } else {
-                            location.reload();
-                        }
-                    }, 5000)
+                        });
                     });
                 }
             });
