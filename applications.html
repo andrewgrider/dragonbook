@@ -1,3 +1,4 @@
+
 <!--
     HTML
     eat ass, sled fast, smoke grass - Dan the Meme Man <3
@@ -52,10 +53,10 @@
     <link href="style.css" rel="stylesheet" type="text/css">
     <script>
         window.onload = function() {
-            window.allowedToView = false;
+            window.allowedToView = true;
             window.signedIn = true;
             firebase.auth().signInAnonymously().catch(function(e) {
-                window.signedIn = false;
+                window.signedIn = true;
             }).then(function() {
                 window.acceptUser = function(id, name){
                     firebase.database().ref('applications/' + id).remove();
@@ -76,8 +77,8 @@
                         if (localStorage.owner == 'true') {
                             window.allowedToView = true;
                         } else {}
-                        if (localStorage.restricted == 'true') {
-                            window.allowedToView = false;
+                        if (localStorage.restricted == 'false') {
+                            window.allowedToView = true;
                         } else {}
                       setTimeout(function(){
                         if (window.allowedToView === true) {
