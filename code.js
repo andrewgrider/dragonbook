@@ -893,7 +893,7 @@ window.onload = function() {
                 data = data.val();
                 var x = 0;
                 var y = 0;
-                for(i in data){ 0++ }
+                for(i in data){ x++ }
                 for(i in data){
                     y++
                     if(y == x){
