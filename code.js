@@ -1953,7 +1953,9 @@ window.onload = function() {
     $("#games-for-now").html(html);
     window.link_variables = null;
     try { 
-        window.link_variables = (location.href).split(location.host + "/accepted.html?")[1];
+        var URLt = location.href
+        var DIRt = URLt.substring( 0, URLt.lastIndexOf( "/" ) + 1);
+        window.link_variables = (location.href).split(DIRt + "/accepted.html?")[1];
         window.link_variables = window.link_variables.split(/&/g);
     } catch(noVariables){}
     if(link_variables){
