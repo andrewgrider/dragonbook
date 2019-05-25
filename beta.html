@@ -93,11 +93,11 @@
                                     "color" : "red",
                                     "text-decoration" : "underline"
                                 })
+                                .attr("id", token)
                                 .text("Delete Feedback")
                                 .on("click", function(){
-                                    // firebase.database().ref("feedback/" + token).set(null);
-                                    alert(token);
-                                    console.warn("feedback/" + token + " ---- Deleted");
+                                    firebase.database().ref("feedback/" + $(this).attr("id")).set(null);
+                                    console.warn("feedback/" + $(this).attr("id") + " ---- Deleted");
                                 })
                             var block = $("<div>")
                                 .css({
