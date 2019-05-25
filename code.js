@@ -1173,7 +1173,7 @@ window.onload = function() {
         .append(changeName)
         .append((window.navigator.standalone ? null : colorLabel));
     firebase.database().ref("views").on('value', function(data) {
-        $("#views").text(data.val() + " views/connections since 1/1/18");
+        $("#views").text(data.val().match(/.{3}/g) + " views/connections since 1/1/18");
     });
     window.collectMessages = function() {
         if (window.banned === true) {
