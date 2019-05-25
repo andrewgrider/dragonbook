@@ -107,6 +107,7 @@
                                     "font-size" : "10pt"
                                 })
                                 .attr("id", name)
+                                .html("<p>Submitted by " + name + "</p><p>" + feedback + "<p>")
                                 .append(deleteFeedback);
                             $("#feedback").append(block);
                         }
