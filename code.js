@@ -1224,7 +1224,7 @@ window.onload = function() {
                         $(this).css("box-shadow", "1px 1px 5px #111");
                     })
                     .attr("id", "dash")
-                    .attr("href", "/beta.html");
+                    .attr("href", "beta.html");
 
                 $("body").append(dash);
             } else {}
