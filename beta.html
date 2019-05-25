@@ -52,7 +52,7 @@
                         var ee = e.val();
                         if (ee[firebase.auth().currentUser.uid]) {
                             window.moderator = true;
-                            $("#status').text("Moderator");
+                            $("#status").text("Moderator");
                         } else {
                             window.moderator = false;
                         }
@@ -64,13 +64,13 @@
                         var ee = e.val();
                         if (ee[firebase.auth().currentUser.uid]) {
                             window.hyper_mod = true;
-                            $("#status').text("Admin");
+                            $("#status").text("Admin");
                         } else {
                             window.hyper_mod = false;
                         }
                     });
                     if(localStorage.owner){
-                        $("#status').text("Site Owner");
+                        $("#status").text("Site Owner");
                     } else {}
                     window.active = true;
                     window.onfocus = function(){
