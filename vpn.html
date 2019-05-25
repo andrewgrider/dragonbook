@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="description" content="Unblock Sites for School">
+        <meta name="keywords" content="AACS,LHS,Chromebook,Unblocked,Chromebook Hacks,Dragonbook,Dragonbook Exploited,Chromebook VPN">
+        <link rel="icon" type="image/png" href="app-icon.png">
+        <meta name="author" content="Andrew Grider">
+        <meta property="og:image" content="app-icon.png">
+        <meta property="og:title" content="Dragonbook VPN">
+        <meta property="og:description" content="Exploits for AACS Dragonbooks">
+        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="app-icon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="app-icon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="app-icon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="app-icon.png" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+        <style>
+            body {
+                margin: 0;
+            }
+            @font-face {
+              font-family: 'hacked';
+              src: url('HACKED.ttf');
+            }
+            #main {
+                background-color: #222;
+                width: 100vw;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+            #url {
+                text-align: left;
+                width: 65vw;
+                padding: 5px;
+                border: none;
+                border-radius: 5px 0 0 5px;
+                display: inline;
+                outline: none;
+                float: left;
+            }
+            #send {
+                border: none;
+                outline: none;
+                background: #555;
+                color: #FFF;
+                border-radius: 0 5px 5px 0;
+                float: right;
+                padding: 5px;
+                width: 75px;
+                cursor: pointer;
+            }
+            #send:hover {
+                background: #444;
+            }
+            h3 {
+                color: #FFF;
+                font-family: 'hacked';
+                font-size: 50pt;
+                font-weight: lighter;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,.1), rgba(255,255,255,.5), rgba(255,255,255,.1), transparent);
+                text-shadow: 0 0 15px #000;
+            }
+            #browse {
+                position: fixed;
+                right: 0;
+                top: 0;
+                border: none;
+                outline: none;
+                color: #FFF;
+                background: #0F0F0F;
+                padding: 5px;
+                font-weight: lighter;
+                cursor: pointer;
+                border-radius: 0 0 0 15px;
+            }
+            #browse:hover {
+                background: #2F2F2F;
+            }
+            #author {
+                position: fixed;
+                left: 5px;
+                top: 5px;
+                color: #FFF;
+                font-family: 'hacked';
+                font-size: 20pt;
+            }
+        </style>
+        <script>
+            window.onload=function(){
+                $("#send").click(function(){
+                    var value = $("#url").val()
+                    value = value.replace(/http:\/\//ig, "");
+                    value = value.replace(/https:\/\//ig, "");
+                    value = value.replace(/www\./ig, "");
+                    if(!value.match(/\./)){
+                        value = encodeURIComponent(value);
+                        value = "bing.com/search?q=" + value;
+                    } else {}
+                    value = "https://saoudi-proxy.appspot.com/" + value;
+                    window.open(value, "_blank");
+                });
+                $("#url").on("keyup", function(e){
+                    if(e.which == 13){
+                        $("#send").trigger("click");
+                    }
+                    else {}
+                });
+                $("#browse").click(function(){
+                    window.open("https://saoudi-proxy.appspot.com/bing.com/search?q=", "_blank", "location=yes,height=" + window.innerHeight + ",width=" + window.innerWidth + ",scrollbars=yes,status=yes");
+                });
+            }
+        </script>
+        <title>Dragonbook VPN</title>
+    </head>
+    <body>
+        <div id="main">
+            <div>
+                <h3>Dragonbook VPN</h3>
+                <div id="input">
+                    <input type="text" placeholder="Enter a Website or Search..." id="url" autocomplete="off" autofocus="true" />
+                    <button id="send">GO</button>
+                </div>
+            </div>
+        </div>
+        <button id="browse">BROWSING<br />VERSION</button>
+        <div id="author">Andrew Grider</div>
+    </body>
+</html>
