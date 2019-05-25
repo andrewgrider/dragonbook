@@ -85,8 +85,9 @@
                         $("#feedback").html("");
                         data = data.val();
                         for(i in data){
-                            var name = i;
+                            var token = i;
                             var feedback = data[i];
+                            console.log(token + " : " + feedback);
                             var deleteFeedback = $("<p>")
                                 .css({
                                     "cursor" : "pointer",
@@ -96,7 +97,7 @@
                                 .text("Delete Feedback")
                                 .click(function(){
                                     $(this).parent().remove();
-                                    firebase.database().ref("feedback/" + name).set(null);
+                                    firebase.database().ref("feedback/" + token).set(null);
                                 })
                             var block = $("<div>")
                                 .css({
@@ -108,8 +109,8 @@
                                     "margin-bottom" : "10px",
                                     "font-size" : "10pt"
                                 })
-                                .attr("id", name)
-                                .html("<p>Feedback Request ID: <i>" + name + "</i></p><p>Feedback: <i>" + feedback + "</i><p>")
+                                .attr("id", token)
+                                .html("<p>Feedback Request ID: <i>" + token + "</i></p><p>Feedback: <i>" + feedback + "</i><p>")
                                 .append(deleteFeedback);
                             $("#feedback").append(block);
                         }
