@@ -891,17 +891,13 @@ window.onload = function() {
               var token;
             firebase.database().ref("feedback").once("value", function(data){
                 data = data.val();
-                var x = 0;
-                var y = 0;
-                for(i in data){ x++ }
+                var x = [];
                 for(i in data){
-                    y++
-                    if(y == x){
-                        token = i;
-                    }
+                    x.push(i);
                 }
+                token = x[x.length - 1];
+                alert("Thanks for the Feedback!\nFeedback Request ID: " + token);
             });
-            alert("Thanks for the Feedback!\nFeedback Request ID: " + token);
         } else {}
     });
     var heightOfBanner = $("#titlebar").prop("offsetHeight") + "px";
