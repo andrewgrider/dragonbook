@@ -82,7 +82,7 @@
                         window.active = false;    
                     };
                     firebase.database().ref("feedback").on("value", function(data) {
-                        $("feedback").clear();
+                        $("feedback").html("");
                         data = data.val();
                         for(i in data){
                             var name = i;
