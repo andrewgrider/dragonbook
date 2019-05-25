@@ -14,6 +14,36 @@ if (!navigator.userAgent.match(/\sCrOS\s/)) {
     }
 } else {}
 window.onload = function() {
+    function processLongNumber(num) {
+      if(num.toString().match(/e\+/)){
+        return num.toString();
+      }
+        num = Math.round(num);
+        num = num.toString();
+        num = num.split("");
+        num = num.reverse();
+        var str = "";
+        var x = 0;
+        for (var i in num) {
+            x++;
+            if ((x % 3) === 0) {
+                str += num[i] + ",";
+            } else {
+                str += num[i];
+            }
+        }
+        str = str.split("");
+        str = str.reverse();
+        str = str.join("");
+        if (str[0] === ',') {
+            str = str.split("");
+            str.shift();
+            str = str.join("");
+            return str;
+        } else {
+            return str;
+        }
+    }
     window.popup = function(content) {
         try {
             $(".popup").remove();
@@ -1173,9 +1203,7 @@ window.onload = function() {
         .append(changeName)
         .append((window.navigator.standalone ? null : colorLabel));
     firebase.database().ref("views").on('value', function(data) {
-        var data = data.val().reverse();
-        data = data.match(/.{3}/g);
-        $("#views").text(data.reverse() + " views/connections since 1/1/18");
+        $("#views").text(processLongNumber(parseInt(data.val())) + " views/connections since 1/1/18");
     });
     window.collectMessages = function() {
         if (window.banned === true) {
