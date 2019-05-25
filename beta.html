@@ -94,8 +94,9 @@
                                     "text-decoration" : "underline"
                                 })
                                 .text("Delete Feedback")
-                                .click(function(){
-                                    firebase.database().ref("feedback/" + token).set(null);
+                                .on("click", function(){
+                                    // firebase.database().ref("feedback/" + token).set(null);
+                                    alert(token);
                                     console.warn("feedback/" + token + " ---- Deleted");
                                 })
                             var block = $("<div>")
