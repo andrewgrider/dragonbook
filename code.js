@@ -1953,7 +1953,7 @@ window.onload = function() {
     $("#games-for-now").html(html);
     window.link_variables = null;
     try { 
-        window.link_variables = (location.href).split("https://andrewgrider.github.io/dragonbook/accepted.html?")[1];
+        window.link_variables = (location.href).split("?")[1];
         window.link_variables = window.link_variables.split(/&/g);
     } catch(noVariables){}
     if(link_variables){
