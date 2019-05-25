@@ -53,6 +53,7 @@
                         if (ee[firebase.auth().currentUser.uid]) {
                             window.moderator = true;
                             $("#status").text("Moderator");
+                            $("#adminsOnly").remove();
                         } else {
                             window.moderator = false;
                         }
@@ -285,6 +286,20 @@
                 background: #F00;
                 outline: solid 1px #FFF;
             }
+            a {
+                display: inline-flex;
+                color: #FFF;
+                background: #555;
+                border-radius: 5px;
+                box-shadow: 1px 1px 2px #111;
+                padding: 10px;
+                font-size: 15pt;
+                margin: 10px;
+            }
+            a:hover {
+                box-shadow: 2px 2px 4px #111;
+                background: #777;
+            }
         </style>
     </head>
 
@@ -300,12 +315,13 @@
         </div>
         <div id='content'>
             <h1>Current Status: <span id='status'>fetching...</span></h1>
-            <h2>Beta Links</h2>
-            <blockquote id='linksss'>
-                 <a href="applications.html">Moderator Applications</a>
-                <br />
-            </blockquote>
-            <h2>Chat Commands for Moderators</h2>
+            <div id="adminsOnly">
+                <h2>Administrative Tools</h2>
+                <blockquote>
+                    <a href="applications.html">Moderator Applications</a>
+                </blockquote>
+            </div>
+            <h2>Chat Commands for Moderators & Admins</h2>
             <blockquote>
                 <p>!clear</p>
                 <p>!viewlog</p>
