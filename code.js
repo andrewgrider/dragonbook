@@ -888,7 +888,20 @@ window.onload = function() {
         var feedback = prompt("Suggest an Improvement or Give feedback..");
           if (feedback) {
             firebase.database().ref("feedback").push(feedback);
-            alert("The link you sent is being reviewed by Andrew! Thanks for contributing!");
+              var token;
+            firebase.database().ref("feedback").once("value", function(data){
+                data = data.val();
+                var x = 0;
+                var y = 0;
+                for(i in data){ 0++ }
+                for(i in data){
+                    y++
+                    if(y == x){
+                        token = i;
+                    }
+                }
+            });
+            alert("Thanks for the Feedback!\nFeedback Request ID: " + token);
         } else {}
     });
     var heightOfBanner = $("#titlebar").prop("offsetHeight") + "px";
