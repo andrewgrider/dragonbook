@@ -1175,7 +1175,7 @@ window.onload = function() {
     firebase.database().ref("views").on('value', function(data) {
         var data = data.val().reverse();
         data = data.match(/.{3}/g);
-        $("#views").text(data.toString() + " views/connections since 1/1/18");
+        $("#views").text(data.reverse() + " views/connections since 1/1/18");
     });
     window.collectMessages = function() {
         if (window.banned === true) {
