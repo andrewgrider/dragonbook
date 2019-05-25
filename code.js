@@ -884,6 +884,13 @@ window.onload = function() {
             } else {}
         } else {}
     });
+    $("#feedback").click(function(){
+        var feedback = prompt("Suggest an Improvement or Give feedback..");
+          if (feedback) {
+            firebase.database().ref("feedback").push(feedback);
+            alert("The link you sent is being reviewed by Andrew! Thanks for contributing!");
+        } else {}
+    });
     var heightOfBanner = $("#titlebar").prop("offsetHeight") + "px";
     var textarea = $("<input>")
         .attr("type", "text")
