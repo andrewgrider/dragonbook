@@ -96,7 +96,6 @@
                                 })
                                 .text("Delete Feedback")
                                 .click(function(){
-                                    $(this).parent().remove();
                                     firebase.database().ref("feedback/" + token).set(null);
                                 })
                             var block = $("<div>")
