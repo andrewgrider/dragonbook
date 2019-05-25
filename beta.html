@@ -82,7 +82,7 @@
                         window.active = false;    
                     };
                     firebase.database().ref("feedback").on("value", function(data) {
-                        $("feedback").html("");
+                        $("#feedback").html("");
                         data = data.val();
                         for(i in data){
                             var name = i;
@@ -96,7 +96,7 @@
                                 .text("Delete Feedback")
                                 .click(function(){
                                     $(this).parent().remove();
-                                    firebase.database().ref("feedback/" + name).remove();
+                                    firebase.database().ref("feedback/" + name).set(null);
                                 })
                             var block = $("<div>")
                                 .css({
