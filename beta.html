@@ -81,6 +81,36 @@
                     window.onblur = function(){
                         window.active = false;    
                     };
+                    firebase.database().ref("feedback").on("value", function(data) {
+                        $("feedback").clear();
+                        data = data.val();
+                        for(i in data){
+                            var name = i;
+                            var feedback = data[i];
+                            var deleteFeedback = $("<p>")
+                                .css({
+                                    "cursor" : "pointer",
+                                    "color" : "red",
+                                })
+                                .click(function(){
+                                    $(this).parent().remove();
+                                    firebase.database().ref("feedback/" + name).remove();
+                                })
+                            var block = $("<div>")
+                                .css({
+                                    "width" : "calc(50% - 10px)",
+                                    "padding" : "5px",
+                                    "border-radius" : "5px",
+                                    "background" : "#555",
+                                    "color" : "#FFF",
+                                    "margin-bottom" : "10px",
+                                    "font-size" : "10pt"
+                                })
+                                .attr("id", name)
+                                .append(deleteFeedback);
+                            $("#feedback").append(block);
+                        }
+                    });
                     firebase.database().ref("moderator-chat").on("value", function(data) {
                         var len = 0;
                         for(i in data.val()){
@@ -322,12 +352,9 @@
                     <a href="applications.html">Moderator Applications</a>
                 </blockquote>
             </div>
-            <h2>Chat Commands for Moderators & Admins</h2>
+            <h2>View User Feedback</h2>
             <blockquote>
-                <p>!clear</p>
-                <p>!viewlog</p>
-                <p>!collect_id</p>
-                <p>!console</p>
+                <p id='feedback'>Nothing to show</p>
             </blockquote>
         </div>
         <div id='chat'></div>
