@@ -87,7 +87,6 @@
                         for(i in data){
                             var token = i;
                             var feedback = data[i];
-                            console.log(token + " : " + feedback);
                             var deleteFeedback = $("<p>")
                                 .css({
                                     "cursor" : "pointer",
@@ -97,6 +96,7 @@
                                 .text("Delete Feedback")
                                 .click(function(){
                                     firebase.database().ref("feedback/" + token).set(null);
+                                    console.warn("feedback/" + token + " ---- Deleted");
                                 })
                             var block = $("<div>")
                                 .css({
