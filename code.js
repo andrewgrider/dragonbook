@@ -1081,9 +1081,13 @@ window.onload = function() {
                     var ts = Date.now();
                     var tsDiff = ts - window.ts1;
                     console.warn((tsDiff / 1000) + "s since last message");
-                    if(tsDiff < 3000){
+                    if(tsDiff < 3000 || message.length > 250){
                         window.ts1 = ts;
-                        alert("To prevent spamming, you are not able to send a message right now. Please try again later"); 
+                        if(message.length > 250){
+                            alert("Exceeded character limit, can not send message.\n Messages can not exceed 250 characters to prevent spam.")
+                        } else {
+                            alert("To prevent spamming, you are not able to send a message right now. Please try again later"); 
+                        }
                     } else {
                         var dataPackage = {
                             "name": window.name,
