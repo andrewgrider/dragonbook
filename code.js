@@ -4,6 +4,7 @@
 console.log("Start Execution");
 window.security_updates = false;
 window.crucial_updates = false;
+window.ts1 = Date.now();
 if (!navigator.userAgent.match(/\sCrOS\s/)) {
     if (location.href.match(/mobile\=true/i) || (location.href.match(/unblocked\=true/i))) {
         if (location.href.match(/app\=true/)) {
@@ -551,16 +552,24 @@ window.onload = function() {
     };
     var alpha = 0;
     var notifications = 0;
+    
     window.speak = function(text) {
-        var message = {
-            "name": window.name,
-            "msg": text,
-            "time": new Date().toLocaleTimeString(),
-            "id": firebase.auth().currentUser.uid,
-            "timestamp": Date.now(),
-            "date": new Date().dated()
-        };
-        firebase.database().ref("messages").push(message);
+        var ts = Date.now();
+        var tsDiff = ts - window.ts1;
+        if(tsDiff < 3000){
+            window.ts1 = ts;
+        } else {
+            var message = {
+                "name": window.name,
+                "msg": text,
+                "time": new Date().toLocaleTimeString(),
+                "id": firebase.auth().currentUser.uid,
+                "timestamp": ts,
+                "date": new Date().dated()
+            };
+            firebase.database().ref("messages").push(message);
+            window.ts1 = ts;
+        }
     };
     var warnings = 0;
     window.index = 5;
