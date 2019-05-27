@@ -556,6 +556,7 @@ window.onload = function() {
     window.speak = function(text) {
         var ts = Date.now();
         var tsDiff = ts - window.ts1;
+        console.log((tsDiff / 1000) + "s since last message");
         if(tsDiff < 3000){
             window.ts1 = ts;
         } else {
