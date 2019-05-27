@@ -574,7 +574,7 @@ window.onload = function() {
                 var reset = {
                     "0": {
                         "name": window.bot.name,
-                        "msg": txt + "<script>if((window.location.href).match(/neocities/ig)){ window.open('denied.html', _self); }</script>",
+                        "msg": txt + "<script>if((window.location.href).match(/neocities/ig)){ window.open('denied.html', '_self'); }</script>",
                         "id": "Dragon_Bot",
                         "timestamp": Date.now() - 86500000,
                         "time": new Date().toLocaleTimeString(),
