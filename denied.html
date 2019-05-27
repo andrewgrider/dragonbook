@@ -25,12 +25,15 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <title>Access Denied</title>
         <style>
+          body {
+            overflow: hidden;
+            padding-left: 50px;
+          }
           #tellMeMore {
             color: #AAA;
             text-decoration: underline;
             cursor: pointer;
-            margin-top: 5px;
-            margin-bottom: 0;
+            margin: 0;
           }
           #more {
             color: #333;
@@ -38,6 +41,9 @@
             height: 0px;
             overflow: hidden;
             transition: height 500ms linear;
+          }
+          h3 {
+            font-weight: normal;
           }
         </style>
         <script>
@@ -49,8 +55,8 @@
         </script>
   </head>
   <body>
-    <h3>Access Denied</h3>
-    <p>You were denied access to this page.</p>
+    <h1>Access Denied</h1>
+    <h3>You were denied access to this page.</h3>
     <p id='tellMeMore'>Tell me more</p>
     <p id='more'>Denied access is usually caused by attempting to access the site on an unauthorized device or from being blocked from accessing the site by Dragonbook's administrative team. If you want to dispute your access being denied, feel free to <a href='mailto:djslendera@gmail.com'>contact us</a>.</p>
   </body>
