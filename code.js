@@ -554,12 +554,6 @@ window.onload = function() {
     var notifications = 0;
     
     window.speak = function(text) {
-        var ts = Date.now();
-        var tsDiff = ts - window.ts1;
-        console.log((tsDiff / 1000) + "s since last message");
-        if(tsDiff < 3000){
-            window.ts1 = ts;
-        } else {
             var message = {
                 "name": window.name,
                 "msg": text,
@@ -569,8 +563,6 @@ window.onload = function() {
                 "date": new Date().dated()
             };
             firebase.database().ref("messages").push(message);
-            window.ts1 = ts;
-        }
     };
     var warnings = 0;
     window.index = 5;
@@ -1086,15 +1078,21 @@ window.onload = function() {
                 message = message.replace(/\\n/g, "<br />");
                 message = message.replace(/\\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;");
                 if (message.replace(/\s/g, "").length > 1) {
-                    var dataPackage = {
-                        "name": window.name,
-                        "msg": message,
-                        "time": new Date().toLocaleTimeString(),
-                        "id": firebase.auth().currentUser.uid,
-                        "timestamp": Date.now(),
-                        "date": new Date().dated()
-                    };
-                    firebase.database().ref("messages").push(dataPackage).
+                    var ts = Date.now();
+                    var tsDiff = ts - window.ts1;
+                    console.warn((tsDiff / 1000) + "s since last message");
+                    if(tsDiff < 3000){
+                        window.ts1 = ts;
+                    } else {
+                        var dataPackage = {
+                            "name": window.name,
+                            "msg": message,
+                            "time": new Date().toLocaleTimeString(),
+                            "id": firebase.auth().currentUser.uid,
+                            "timestamp": Date.now(),
+                            "date": new Date().dated()
+                        };
+                        firebase.database().ref("messages").push(dataPackage).
                     catch (function(e) {
                         var errs = [
                             "Uh oh!",
@@ -1105,6 +1103,8 @@ window.onload = function() {
                         ];
                         window.notification("The Chat has temporarily been disabled!", errs[Math.floor(Math.random() * errs.length)], 3000);
                     });
+                    window.ts1 = ts
+                    } else { alert("To prevent spamming, you are not able to send a message right now. Please try again later"); }
                 } else {}
                 $(this).val("");
                 if (message[0] == "!") {
