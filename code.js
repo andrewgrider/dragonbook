@@ -1083,6 +1083,7 @@ window.onload = function() {
                     console.warn((tsDiff / 1000) + "s since last message");
                     if(tsDiff < 3000){
                         window.ts1 = ts;
+                        alert("To prevent spamming, you are not able to send a message right now. Please try again later"); 
                     } else {
                         var dataPackage = {
                             "name": window.name,
@@ -1104,7 +1105,7 @@ window.onload = function() {
                         window.notification("The Chat has temporarily been disabled!", errs[Math.floor(Math.random() * errs.length)], 3000);
                     });
                     window.ts1 = ts
-                    } else { alert("To prevent spamming, you are not able to send a message right now. Please try again later"); }
+                    }
                 } else {}
                 $(this).val("");
                 if (message[0] == "!") {
