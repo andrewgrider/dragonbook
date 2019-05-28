@@ -180,6 +180,7 @@ window.onload = function() {
         "Happy Wheels": "happy-wheels.swf",
         "Heavy Weapons": "HeavyWeapons.swf",
         "Infectonator 2": "infectonator-2.swf",
+        "Inishie Dungeon" : "inishie.swf",
         "Kingdom Rush": "kingdom-rush.swf",
         "Mahjong": "mahjong.swf",
         "Mine Blocks": "mine-blocks.swf",
