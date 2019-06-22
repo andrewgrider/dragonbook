@@ -898,6 +898,7 @@ td:nth-child(even) {
 }
 #news {
   text-align: left;
+  max-height: 50px;
 }
 .article {
   display: block;
