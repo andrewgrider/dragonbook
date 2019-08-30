@@ -1,6 +1,3 @@
-/**
-    JAVASCRIPT
-**/
 console.log("Start Execution");
 window["chat-enabled"] = true;
 window.security_updates = false;
