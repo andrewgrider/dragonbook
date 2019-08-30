@@ -659,7 +659,7 @@ kbd {
     -webkit-background-clip: text !important;
     background-clip: text !important;
 }
-.mod {
+.modtext {
     color: #0EF;
 }
 .pm {
