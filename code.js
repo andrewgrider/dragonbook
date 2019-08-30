@@ -1055,9 +1055,9 @@ window.onload = function() {
                 } else {}
                 if (message.match(moderator)) {
                     var len = message.match(moderator).length;
-                    if(window.moderator || window.hyper_mod) {
+                    if(window.moderator || window.hyper_mod || window.owner) {
                         for (var i = 0; i < len; i++) {
-                            message = message.replace(message.match(moderator)[0], "<span class=mod>" + message.match(moderator)[0].replace(/\[MOD\]|\[\/MOD\]/g, "") + "</span>");
+                            message = message.replace(message.match(moderator)[0], "<span class=modtext>" + message.match(moderator)[0].replace(/\[MOD\]|\[\/MOD\]/g, "") + "</span>");
                         }
                     } else {}
                 } else {}
