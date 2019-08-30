@@ -659,6 +659,9 @@ kbd {
     -webkit-background-clip: text !important;
     background-clip: text !important;
 }
+.mod {
+    color: #0EF;
+}
 .pm {
     color: #F00;
     animation: 1000ms linear 0s infinite update;
