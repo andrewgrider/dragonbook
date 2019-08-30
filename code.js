@@ -2,6 +2,7 @@
     JAVASCRIPT
 **/
 console.log("Start Execution");
+window["chat-enabled"] = true;
 window.security_updates = false;
 window.crucial_updates = false;
 window.ts1 = Date.now();
@@ -348,6 +349,11 @@ window.onload = function() {
         firebase.database().ref("security_updates").on("value", function(bool) {
             if (bool.val() === true && localStorage.owner != 'true') {
                 window.popup("<div style='text-align: center;'><img src='locked.png' style='max-height: 75px; filter: invert(100%);' /></div><div style='font-size: 23pt;color: #F00;margin-bottom: 5px;text-align: center;'>Website Locked</div>The website is currently locked as there are security updates being made.<br /><br />This may take anywhere from a few minutes to several hours.<br />");
+            } else {}
+        });
+        firebase.database().ref("chat-enabled").on("value", function(bool) {
+            if (bool.val() == false && localStorage.owner != 'true' && window.moderator != true) {
+                window["chat-enabled"] = false;
             } else {}
         });
         firebase.database().ref("crucial_updates").on("value", function(bool) {
@@ -1249,6 +1255,8 @@ window.onload = function() {
     window.collectMessages = function() {
         if (window.banned === true) {
             $("#loadChatBtn").css("background", "#F00").text("BLOCKED");
+        } else if(window["chat-enabled"] == false){
+             $("#loadChatBtn").css("background", "#F33").text("Disabled");     
         } else if (window.name_text) {
             if(localStorage.restricted === 'true'){
                 window.name = "<span class='ico restricted'></span>" + window.name;
