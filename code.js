@@ -1022,6 +1022,7 @@ window.onload = function() {
                 var rainbow = /\:\:(.*?)\:\:/ig;
                 var supreme = /\[\[(.*?)\]\]/ig;
                 var gold = /\[GOLD\](.*?)\[\/GOLD\]/ig;
+                var moderator = /\[MOD\](.*?)\[\/MOD\]/ig;
                 if (message.match(bold)) {
                     var len = message.match(bold).length;
                     for (var i = 0; i < len; i++) {
@@ -1051,6 +1052,14 @@ window.onload = function() {
                     for (var i = 0; i < len; i++) {
                         message = message.replace(message.match(gold)[0], "<span class=gold>" + message.match(gold)[0].replace(/\[GOLD\]|\[\/GOLD\]/g, "") + "</span>");
                     }
+                } else {}
+                if (message.match(moderator)) {
+                    var len = message.match(moderator).length;
+                    if(window.moderator || window.hyper_mod) {
+                        for (var i = 0; i < len; i++) {
+                            message = message.replace(message.match(moderator)[0], "<span class=mod>" + message.match(moderator)[0].replace(/\[MOD\]|\[\/MOD\]/g, "") + "</span>");
+                        }
+                    } else {}
                 } else {}
                 if (message.match(strikethrough)) {
                     var len = message.match(strikethrough).length;
