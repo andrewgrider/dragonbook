@@ -14,8 +14,41 @@
             };
             firebase.initializeApp(config);
         </script>
+        <script>
+          window.onload = function(){
+            window.createAccount = function(email, pass){
+              // Creates the account AND signs it in
+              firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // ...
+              });
+            }
+            window.signIn = function(email, pass){
+              firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // ...
+              }):
+              window.open("https://andrewgrider.github.io/dragonbook/accepted.html", "_self");
+            };
+            
+            if(localStorage.account){
+              
+            } else {}
+          };  
+        </script>
+        <link href="style.css" rel="stylesheet" type="text/css">
   </head>
   <body>
-  
+    <div id="titlebar"><span id="titlebarText">Login</span></div>
+    <div id='content'>
+      <input type="email" id="email" placeholder="Email" />
+      <input type="password" id="password" placeholder="Password" />
+      <input type="button" id="login" value="Login" />
+      <input type="button" id="create" value="Create Account" />
+    </div>
   </body>
 </html>
