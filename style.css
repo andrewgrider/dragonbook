@@ -384,7 +384,8 @@ iframe {
     background-color: black;
 }
 .owner {
-    background: linear-gradient(90deg, red, orange, yellow, green, blue, violet);
+    /* background: linear-gradient(90deg, red, orange, yellow, green, blue, violet); */
+    background: purple;
 }
 .owner:after {
     pointer-events: none;
