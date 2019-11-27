@@ -6,6 +6,9 @@
     background-color: #222;
     color: #FFF;
 }
+*:focus {
+    outline: none;
+}
 body:selected, html:selected, :root:selected, *:selected {
     background-color: rgba(0, 0, 0, 0.5);
     color: #FFF;
